@@ -2,11 +2,15 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
-const express = require("express");
+const path = require("path");
 
 const app = express();
 
-const http = require("http");
+app.use(cors());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(morgan("dev"));
+app.use(express.static(path.join(process.env.PWD, "public")));
 
 const HOST = process.env.HOST || "127.0.0.1";
 const PORT = process.env.PORT || 7000;
