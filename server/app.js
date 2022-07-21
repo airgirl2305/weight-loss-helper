@@ -1,9 +1,15 @@
 require("dotenv").config();
 const express = require("express");
+const cors = require("cors");
+const morgan = require("morgan");
+const express = require("express");
+
+const app = express();
+
 const http = require("http");
 
-const host = "127.0.0.1";
-const port = 7000;
+const HOST = process.env.HOST || "127.0.0.1";
+const PORT = process.env.PORT || 7000;
 
 function notFound(res) {
   res.statusCode = 404;
@@ -11,7 +17,7 @@ function notFound(res) {
   res.end("Not found\n");
 }
 
-const server = http.createServer((req, res) => {
+const app = http.createServer((req, res) => {
   switch (req.method) {
     case "GET": {
       switch (req.url) {
@@ -64,6 +70,9 @@ const server = http.createServer((req, res) => {
   }
 });
 
-server.listen(port, host, () => {
-  console.log(`Server listens http://${host}:${port}`);
+app.listen(PORT, HOST, (error) => {
+  if (error) {
+    return console.log("something bad happened", error);
+  }
+  console.log(`Server is listening on  http://${HOST}:${PORT}`);
 });
