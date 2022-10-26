@@ -78,5 +78,5 @@ app.listen(PORT, HOST, (error) => {
   if (error) {
     return console.log("something bad happened", error);
   }
-  console.log(`Server is listening on  http://${HOST}:${PORT}`);
+  console.log(`Server is listening on  https://${HOST}:${PORT}`);
 });
