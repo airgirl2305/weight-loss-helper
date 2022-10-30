@@ -1,15 +1,36 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const morgan = require("morgan");
+const logger = require("morgan");
 const path = require("path");
 
-const app = express();
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
+const FileStore = require("session-file-store")(session);
+const ErrorHandler = require("./src/middlewares/errorsMv");
+const http = require("http");
 
+const { COOKIE_SECRET, COOKIE_NAME } = process.env;
+
+const sessionConfig = {
+  name: COOKIE_NAME,
+  secret: COOKIE_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  store: new FileStore(),
+  cookie: {
+    secure: false,
+    httpOnly: true,
+    maxAge: 1e3 * 86400,
+  },
+};
+
+const sessionParser = session(sessionConfig);
+const app = express();
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(morgan("dev"));
+app.use(logger("combined")); // 'dev'
 app.use(express.static(path.join(process.env.PWD, "public")));
 
 const HOST = process.env.HOST || "127.0.0.1";

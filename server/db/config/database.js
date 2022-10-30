@@ -1,7 +1,8 @@
-require("dotenv").config();
+require('dotenv').config();
 
-const { DB_USERNAME, DB_USER_PASSWORD, DB_NAME, DB_HOST, DB_PORT, DB_DIALECT } =
-  process.env;
+const {
+  DB_USERNAME, DB_USER_PASSWORD, DB_NAME, DB_HOST, DB_PORT, DB_DIALECT,
+} = process.e;
 
 module.exports = {
   development: {
@@ -12,26 +13,26 @@ module.exports = {
     port: DB_PORT,
     dialect: DB_DIALECT,
     /* Чтобы sequelize следил за сидерами (не накатывались те сидеры,
-    которые уже были добавлены в БД, аналогично миграциям)*/
+    которые уже были добавлены в БД, аналогично миграциям) */
     // Определяем другой тип хранилища. По умолчанию: none
-    seederStorage: "json",
+    seederStorage: 'json',
     // Определяем другое название для файла. По умолчанию: sequelize-data.json
-    seederStoragePath: "sequelizeData.json",
+    seederStoragePath: 'sequelizeData.json',
     // Определяем другое название для таблицы. По умолчанию: SequelizeData
-    seederStorageTableName: "SequelizeData",
+    seederStorageTableName: 'SequelizeData',
   },
   test: {
-    username: "root",
+    username: 'root',
     password: null,
-    database: "database_test",
+    database: 'database_test',
     host: DB_HOST,
     port: DB_PORT,
     dialect: DB_DIALECT,
   },
   production: {
-    username: "root",
+    username: 'root',
     password: null,
-    database: "database_production",
+    database: 'database_production',
     host: DB_HOST,
     port: DB_PORT,
     dialect: DB_DIALECT,
