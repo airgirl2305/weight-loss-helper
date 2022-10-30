@@ -1,15 +1,14 @@
-const today = new Date()
+const today = new Date();
 
 const gramInKcalOfFatHuman = 7.7;
 const gramInKcalOFat = 9.1;
 const gramInKcalOfCarbs = 4.1;
-const gramInKcalOfProtein = 4.1;
-const deficitInKcalDailyHealthy = 1000;
-const weightLossDailyHealthy =
-  deficitInKcalDailyHealthy / gramInKcalOfFatHuman / 1000;
+const gramInKcalOfProtein = 4;
+const deficitInKcalDailyHealthy = 10;
+const weightLossDailyHealthy = deficitInKcalDailyHealthy / gramInKcalOfFatHuman / 10;
 
 const initialData = {
-  sex: 'female'",
+  sex: 'female',
   height: 167.3,
   weight: 65.07,
   weightPlanA: 57,
@@ -19,89 +18,88 @@ const initialData = {
   startDate: new Date(2022, 9, 23),
   finalDate: new Date(2022, 11, 32),
   dateTheBeaverSDay: new Date(2022, 11, 4),
+};
 
-
-let actualData = {
+const actualData = {
   weightActual: 63.44,
   checkDate: new Date() - 1,
-
+};
 
 const daysPlanned = Math.round(
-  (initialData.finalDate - initialData.startDate) / (24 * 60 * 60 * 1000)
+  (initialData.finalDate - initialData.startDate) / (24 * 60 * 60 * 1000),
+);
 
-let daysLeft = Math.round(
-  (initialData.finalDate - today) / (24 * 60 * 60 * 1000)
+const daysLeft = Math.round(
+  (initialData.finalDate - today) / (24 * 60 * 60 * 1000),
+);
 
+const daysPassed = daysPlanned - daysLeft;
 
-let daysPassed = daysPlanned - daysLef
+const weightToLosePlanA = initialData.weight - initialData.weightPlanA;
+const weightToLosePlanB = initialData.weight - initialData.weightPlanB;
+const weightToLosePlanC = initialData.weight - initialData.weightPlanC;
 
-const weightToLosePlanA = initialData.weight - initialData.weightPla
-const weightToLosePlanB = initialData.weight - initialData.weightPla
-const weightToLosePlanC = initialData.weight - initialData.weightPla
+const weightToLoseActualPlanA = actualData.weight - initialData.weightPlanA;
+const weightToLoseActualPlanB = actualData.weight - initialData.weightPlanB;
+const weightToLoseActualPlanC = actualData.weight - initialData.weightPlanC;
 
-const weightToLoseActualPlanA = actualData.weight - initialData.weightPla
-const weightToLoseActualPlanB = actualData.weight - initialData.weightPla
-const weightToLoseActualPlanC = actualData.weight - initialData.weightPla
+const weightLossDailyPlanA = weightToLosePlanA / daysPlanned;
+const weightLossDailyPlanB = weightToLosePlanB / daysPlanned;
+const weightLossDailyPlanC = weightToLosePlanC / daysPlanned;
 
-const weightLossDailyPlanA = weightToLosePlanA / daysPlann
-const weightLossDailyPlanB = weightToLosePlanB / daysPlann
-const weightLossDailyPlanC = weightToLosePlanC / daysPlann
+const weightLossDailyActualPlanA = weightToLoseActualPlanA / daysLeft;
+const weightLossDailyActualPlanB = weightToLoseActualPlanB / daysLeft;
+const weightLossDailyActualPlanC = weightToLoseActualPlanC / daysLeft;
 
-let weightLossDailyActualPlanA = weightToLoseActualPlanA / daysLe
-let weightLossDailyActualPlanB = weightToLoseActualPlanB / daysLe
-let weightLossDailyActualPlanC = weightToLoseActualPlanC / daysLe
+const weightLossWeeklyActualPlanAInGr = Math.ceil(
+  weightLossDailyActualPlanA * 1000 * 7,
+);
 
-let weightLossWeeklyActualPlanAInGr = Math.ceil(
-  weightLossDailyActualPlanA * 1000 * 7
+const weightLossWeeklyActualPlanBInGr = Math.ceil(
+  weightLossDailyActualPlanB * 1000 * 7,
+);
 
-let weightLossWeeklyActualPlanBInGr = Math.ceil(
-  weightLossDailyActualPlanB * 1000 * 7
+const weightLossWeeklyActualPlanCInGr = Math.ceil(
+  weightLossDailyActualPlanC * 1000 * 7,
+);
 
-let weightLossWeeklyActualPlanCInGr = Math.ceil(
-  weightLossDailyActualPlanC * 1000 * 7
-
-/*console.log(
+/* console.log(
   "weight loss Weekly actual",
   weightLossWeeklyActualPlanAInGr,
   weightLossWeeklyActualPlanBInGr,
   weightLossWeeklyActualPlanCInGr
-);*/
+); */
 
 const daysLeftHealthyPlanA = Math.ceil(
-  weightToLosePlanA / weightLossDailyHealthy
+  weightToLosePlanA / weightLossDailyHealthy,
 );
-let dateFinnishHealthyPlanA = new Date();
+const dateFinnishHealthyPlanA = new Date();
 dateFinnishHealthyPlanA.setDate(
-  initialData.startDate.getDate() + daysLeftHealthyPlanA
-)
+  initialData.startDate.getDate() + daysLeftHealthyPlanA,
+);
 
 const daysLeftHealthyActualPlanA = Math.ceil(
-  weightToLoseActualPlanA / weightLossDailyHealthy
-)
-let dateFinnishHealthyActualPlanA = new Date()
+  weightToLoseActualPlanA / weightLossDailyHealthy,
+);
+const dateFinnishHealthyActualPlanA = new Date();
 dateFinnishHealthyActualPlanA.setDate(
-  initialData.startDate.getDate() + daysLeftHealthyActualPlanA
-)
+  initialData.startDate.getDate() + daysLeftHealthyActualPlanA,
+);
 
 // for the beaver's day
 
-const weightToLoseTheBeaverSDay =
-  initialData.weight - initialData.weightTheBeaverSDay
-const weightToLoseActualTheBeaverSDay =
-  actualData.weight - initialData.weightTheBeaverSDay
+const weightToLoseTheBeaverSDay = initialData.weight - initialData.weightTheBeaverSDay;
+const weightToLoseActualTheBeaverSDay = actualData.weight - initialData.weightTheBeaverSDay;
 
-let daysLeftTheBeaverSDay = Math.round(
-  (initialData.dateTheBeaverSDay - initialData.startDate) /
-  (24 * 60 * 60 * 1000)
-)
-let daysLeftActualTheBeaverSDay =
-  Math.round((initialData.dateTheBeaverSDay - today) / (24 * 60 * 60 * 1000)) +
-  1 // checked
+const daysLeftTheBeaverSDay = Math.round(
+  (initialData.dateTheBeaverSDay - initialData.startDate)
+    / (24 * 60 * 60 * 1000),
+);
+const daysLeftActualTheBeaverSDay = Math.round((initialData.dateTheBeaverSDay - today) / (24 * 60 * 60 * 1000))
+  + 1; // checked
 
-let weightLossDailyTheBeaverSDay =
-  weightToLoseTheBeaverSDay / daysLeftTheBeaverSDay
+const weightLossDailyTheBeaverSDay = weightToLoseTheBeaverSDay / daysLeftTheBeaverSDay;
 
-let weightLossDailyActualTheBeaverSDay =
-  weightToLoseActualTheBeaverSDay / daysLeftActualTheBeaverSDay
+const weightLossDailyActualTheBeaverSDay = weightToLoseActualTheBeaverSDay / daysLeftActualTheBeaverSDay;
 
 // for the beaver's day
